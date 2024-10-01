@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400&display=swap" rel="stylesheet">
+    <title>Preloader Animation</title>
+</head>
+<body>
+    <div class="preloader">
+        <div class="body">
+            <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+            <dotlottie-player src="https://lottie.host/1cf99f2e-ccc0-4e53-99cc-e141dd708f37/ucbhxwNBwh.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+        </div>
+        <div class="longfazers">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <img src="CODESPRINT-warp-warp (1).png" alt="CODESPRINT Image">
+    </div>
+    <div class="content" style="display: none;">
+       
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const preloader = document.querySelector('.preloader');
+            const content = document.querySelector('.content');
+            const bodyAnimation = document.querySelector('.body');
+
+            // Show the main content after preloader
+            setTimeout(() => {
+                bodyAnimation.style.animation = 'slideOutToRight 2s ease-out'; // Slide out to the right
+                setTimeout(() => {
+                    preloader.style.display = 'none'; // Hide preloader
+                    content.style.display = 'block'; // Show content
+                }, 1000); // Wait for slide-out animation to finish
+            }, 3000); // Wait 3 seconds before starting the transition
+        });
+    </script>
+</body>
+</html>
