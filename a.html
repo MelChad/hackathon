@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Timeline</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="top-section">
+      <h1>Animated Timeline</h1>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quam accusantium cumque quos, aperiam nostrum quod reiciendis illum fugit beatae, nisi, nulla laboriosam! Officia tenetur iusto quis dolorem repudiandae inventore reiciendis.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline__line"></div>
+      
+      <div class="timeline__section">
+        <div class="timeline__section__bead"></div>
+        <div class="timeline__section__content">
+          <h2>1902</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut enim sunt modi qui cum eveniet magni iure laudantium vitae.</p>
+        </div>
+      </div>
+
+      <div class="timeline__section">
+        <div class="timeline__section__bead"></div>
+        <div class="timeline__section__content">
+          <h2>1934</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut enim sunt modi qui cum eveniet magni iure laudantium vitae.</p>
+        </div>
+      </div>
+
+      <div class="timeline__section">
+        <div class="timeline__section__bead"></div>
+        <div class="timeline__section__content">
+          <h2>1999</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut enim sunt modi qui cum eveniet magni iure laudantium vitae.</p>
+        </div>
+      </div>
+
+      <div class="timeline__section">
+        <div class="timeline__section__bead"></div>
+        <div class="timeline__section__content">
+          <h2>2001</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut enim sunt modi qui cum eveniet magni iure laudantium vitae.</p>
+        </div>
+      </div>
+
+      <div class="timeline__section">
+        <div class="timeline__section__bead"></div>
+        <div class="timeline__section__content">
+          <h2>2005</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut enim sunt modi qui cum eveniet magni iure laudantium vitae.</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <script >
+function qs(selector, all = false) {
+  return all ? document.querySelectorAll(selector) : document.querySelector(selector);
+}
+
+const sections = qs('.timeline__section', true);
+const timeline = qs('.timeline');
+const line = qs('.timeline__line');
+
+line.style.bottom = `calc(100% - 20px)`;
+let prevScrollY = window.scrollY;
+let up, down;
+let full = false;
+let set = 0;
+const targetY = window.innerHeight * 0.8;
+
+function scrollHandler(e) {
+  const { scrollY } = window;
+
+  up = scrollY < prevScrollY;
+  down = !up;
+
+  const timelineRect = timeline.getBoundingClientRect();
+  const dist = targetY - timelineRect.top;
+
+  // Set the distance the line should travel
+  if (down && !full) {
+    set = Math.max(set, dist);
+    line.style.bottom = `calc(100% - ${set}px)`;
+  }
+
+  if (dist > timeline.offsetHeight + 50 && !full) {
+    full = true;
+    line.style.bottom = `-50px`;
+  }
+
+  sections.forEach((item, index) => {
+    const rect = item.getBoundingClientRect();
+
+    // Add class to show item and control animations
+    if (rect.top + item.offsetHeight / 5 < targetY) {
+      item.classList.add('show-me');
+      item.style.transform = `translateX(0)`;  // Bring it back into view
+
+      // Animate the line based on scroll direction
+      if (down) {
+        const percentage = Math.min((set / (timeline.offsetHeight + 50)) * 100, 100);
+        line.style.height = `${percentage}%`;  // Adjust the line height as we scroll down
+      }
+    } else {
+      item.classList.remove('show-me');
+      item.style.transform = `translateX(${index % 2 === 0 ? '-' : ''}100%)`; // Slide out
+
+      // Reverse the line height as we scroll back
+      if (up) {
+        const percentage = Math.max((set / (timeline.offsetHeight + 50)) * 100, 0);
+        line.style.height = `${percentage}%`;
+      }
+    }
+  });
+
+  prevScrollY = window.scrollY;
+}
+
+scrollHandler();
+line.style.display = 'block';
+window.addEventListener('scroll', scrollHandler);
+
+
+  </script>
+</body>
+</html>
+
+ 
