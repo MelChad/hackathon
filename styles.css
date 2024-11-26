@@ -2063,7 +2063,7 @@ footer{
 
 @media (max-width: 425px) {
     .title {
-      font-size: 3rem; /* Further reduce title size for mobile */
+      font-size: 3.5rem; /* Further reduce title size for mobile */
     }
   
     .subtitle {
