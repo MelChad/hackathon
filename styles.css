@@ -431,10 +431,6 @@ body {
 /*section 3*/
 .provide{
   height: 100vh;
-  background-image: url("images/3w.png"); /* Adjust the path based on your project structure */
-  background-size: cover; /* Cover the entire viewport */
-  background-repeat: no-repeat; /* Prevent the image from repeating */
-  background-position: center; 
   position: relative;
 
 }
@@ -588,10 +584,6 @@ vertical-align: middle; /* Align icon vertically with text */
 
 .ag-timeline-block {
   padding: 100px 0;
-  background-image: url("images/11.png"); /* Adjust the path based on your project structure */
-  background-size: cover; /* Cover the entire viewport */
-  background-repeat: no-repeat; /* Prevent the image from repeating */
-  background-position: center; 
 }
 .ag-timeline_title-box {
   padding: 0 0 30px;

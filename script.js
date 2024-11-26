@@ -182,6 +182,7 @@ window.onload = () => {
     animateText(); // Call the existing text animation
     setInterval(countdown, 1000);
     AOS.init({
-      mirror: true  // No animation on scroll back
+      mirror: true  ,// No animation on scroll back
+      offset: 70,
     });
 };
